@@ -3,11 +3,18 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Доставка еды</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <script src="main.js"></script>
 </head>
 <body>
     <header class="header sticky-top">
@@ -138,12 +145,102 @@
         </section>
 
         <section class="contacts container">
-            <div class="text-left py-5">
-                <h2 class="mb-3">Выбор предприятия общественного питания</h2>
-                <div class="heading-line mx-auto bg-dark"></div>
-                <div class="heading-line mx-auto"></div>
-            </div>  
+            <div>
+                <div class="text-left py-5">
+                    <h2 class="mb-3">Выбор предприятия общественного питания</h2>
+                    <div class="heading-line mx-auto bg-dark"></div>
+                    <div class="heading-line mx-auto"></div>
+                </div>  
+                <div class="col-lg-3 col-md-6 p-0 d-flex justify-content-center align-items-center dark">
+                    <p>
+                        <label for="select">Административный округ</label>
+                        <select id="select">
+                        <optgroup>
+                            <option value="">Не выбрано</option>
+                            <option value="">ЦАО</option>
+                            <option value="">САО</option>
+                            <option value="">ЗАО</option>
+                            <option value="">ЮАО</option>
+                            <option value="">ВАО</option>
+                        </optgroup>
+                        </select>
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6 p-0 d-flex justify-content-center align-items-center dark">
+                    <p>
+                        <label for="select">Район</label>
+                        <select id="selec">
+                        <optgroup>
+                            <option value="">Не вабрано</option>
+                        </optgroup>
+                        </select>
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6 p-0 d-flex justify-content-center align-items-center dark">
+                    <p>
+                        <label for="select">Тип</label>
+                        <select id="sele">
+                        <optgroup>
+                            <option value="">Не вабрано</option>
+                        </optgroup>
+                        </select>
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6 p-0 d-flex justify-content-center align-items-center dark">
+                    <p>
+                        <label for="select">СоцСкидка</label>
+                        <select id="sel">
+                        <optgroup>
+                            <option value="">Не выбрано</option>
+                            <option value="">Я являюсь студентом ВУЗа</option>
+                        </optgroup>
+                        </select>
+                    </p>
+                </div>
+                <input type="button" value="Найти">
+
+
+            </div>
         </section>
+        <div class="container">
+
+            <div class="search-form">
+                <div class="search-form-input">
+                    <input type="text" id="search-field">
+                    <button class="search-btn">Найти</button>
+                </div>
+                <div class="search-form-response">
+                    <ul class="list-input" id="list">
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pagination-info">
+                <span>
+                    Показывать по
+                    <select name="per-page" class="per-page-btn">
+                        <option>5</option>
+                        <option selected>10</option>
+                        <option>15</option>
+                        <option>25</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                    записей на странице.
+                </span>
+                <span class="current-interval-info">
+                    Показываны записи с <span class="current-interval-start"></span> по
+                    <span class="current-interval-end"></span> из
+                    <span class="total-count"></span>
+                </span>
+            </div>
+
+            <div class="facts-list" data-url="https://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants">
+
+            </div>
+            <div class="pagination"></div>
+        </div>
 
         <section class="gal container-fluid bg-light" id="gal">
             <div class="text-center py-5">
@@ -216,6 +313,13 @@
                     Бытрая доставка
                 </label>
             </p>
+            <div>
+                <h2 class="mb-3">Сумма заказа:</h2>
+                <output name="result" id="output">100</output>
+            </div>
+            <div class="button-right">
+                <input type="button" value="Оформить заказ">
+            </div>
         </section>
 
         <footer class="footer">
@@ -224,6 +328,17 @@
             </div>
             <div class="text-center py-4 border-top text-dark">
                 <p>&copy; ООО"Везу еду"</p>
+                <div class="bd-example">
+                    <address>
+                      <strong>Twitter, Inc.</strong><br>
+                      1355 Market St, Suite 900<br>
+                      Moscow, CA 94103<br>
+                      <abbr title="Phone">P:</abbr> (800) 555-3535
+                    </address>
+                    <address>
+                      <a href="mailto:first.last@example.com">vezyedy@example.com</a>
+                    </address>
+                  </div>
             </div>
         </footer>
 
