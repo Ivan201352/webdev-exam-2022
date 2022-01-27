@@ -1,12 +1,38 @@
 window.onload = function () {
     downloadData()
+    let menuButt = document.querySelectorAll('.menuButt');
+    menuButt.forEach(function (btn) {
+        btn.addEventListener('click', setFunk)
+    })
 
     //let choseBut = document.querySelector(".choseBut")
     //choseBut.addEventListener("click", createMenu)
-    
 }
-
 let data
+
+function setFunk(event) {
+    let oper = event.target.innerHTML;
+    // let idE = event.currentTarget.children('.pole').id;
+    // alert(idE);
+    let pole = event.target.closest('.menuButt').querySelector('.pole');
+    let clicks = 0;
+    switch(oper){
+        case '+':
+            // alert("+")
+                pole.innerHTML = Number(pole.innerHTML) + 1;
+            break
+        case '-':
+            // alert("-")
+                if (pole.innerHTML != 0 && pole.innerHTML != NaN){
+                    pole.innerHTML = Number(pole.innerHTML) - 1;
+                }
+            break
+    }
+    if (pole.innerHTML == "0"){
+        pole.innerHTML = "";
+    }
+    // alert(oper);
+}
 
 function downloadData() {
     let url_add = "http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants";
