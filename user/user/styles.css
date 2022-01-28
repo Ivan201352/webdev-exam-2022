@@ -9,3 +9,18 @@
 .toast:not(.show) {
      display:inline-block
 }
+
+#modal-fix {
+    display: none;
+}
+
+.modal-body img {
+    max-height: 50px;
+    object-fit: cover;
+    margin-right: 5px;
+    max-width: 50px;
+}
+
+.castl {
+    width: 120px;
+}

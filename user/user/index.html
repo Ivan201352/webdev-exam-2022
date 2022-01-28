@@ -17,7 +17,7 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <!-- NavBar -->
+    <!-- Шапка -->
     <header class="header sticky-top">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
@@ -44,7 +44,7 @@
             </div>
         </nav>
     </header>
-    <!-- NavBar Ending -->
+    <!-- Шапка -->
     <main>
         <!-- Карусель -->
         <div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -55,7 +55,7 @@
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Закрыть"></button>
             </div>
         </div>
-        <div style= "display: flex; justify-content: space-around;" class="py-5">
+        <div class="d-flex justify-content-around">
             <div id="carouselExampleSlidesOnly" class="carousel slide col-lg-5 col-md-3" data-bs-ride="carousel" >
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="2200">
@@ -71,14 +71,13 @@
             </div>
         </div>
         <!-- Карусель -->
-
         <!-- Реклама -->
         <section class="galery container-fluid bg-light" id="galery">
             <div class="text-center py-5">
                 <h2 class="mb-3">ООО "Везу еду"</h2>
                 <div class="heading-line mx-auto bg-dark"></div>
             </div>
-            <div class="row d-flex" style="justify-content: space-around; text-align: center;">
+            <div class="row d-flex justify-content-around text-center">
                 <div class="col-lg-4 col-md-6 p-0 dark">
                     <div class="card-body"> 
                         <img src="img/1.1.png" width="175px" alt="logo">
@@ -118,9 +117,7 @@
             </div>
         </section>
         <!-- Реклама -->
-
-
-        <!-- Выбор -->
+        <!-- Выбор ресторана -->
         <section class="contacts container">
             <div>
                 <div class="py-5">
@@ -136,7 +133,7 @@
                         <div class="">
                             <p>
                                 <label for="select">Административный округ</label><br>
-                                <select id="select" style="width: 100%;">
+                                <select id="select" class="w-100">
                                     <optgroup>
                                         <option value="">Не выбрано</option>
                                         <option value="">Западный административный округ</option>
@@ -157,7 +154,7 @@
 
                         <div class="">
                             <p>
-                                <label for="select" style="width: 100%;">Район</label><br>
+                                <label for="select" class="w-100">Район</label><br>
                                 <select id="selec">
                                     <optgroup>
                                         <option value="">район Тропарёво-Никулино</option>
@@ -278,10 +275,10 @@
                             </p>
                         </div>
 
-                        <div class="">
+                        <div class="w-100">
                             <p>
                                 <label for="select">Скидка</label><br>
-                                <select id="sel" style="width: 100%;">
+                                <select id="sel">
                                     <optgroup>
                                         <option value="">Не выбрано</option>
                                         <option value="">Я являюсь студентом ВУЗа</option>
@@ -290,9 +287,9 @@
                             </p>
                         </div>
 
-                        <div class="">
+                        <div class="castl">
                             <span class="invisible">Костыль</span><br>
-                            <input class="poisk" type="button" style="width: 120px;" value="Найти">
+                            <input class="poisk castl" type="button" value="Найти">
                         </div>
 
                     </div>
@@ -353,23 +350,23 @@
             </div>
 
         </section>
-        <!-- Выбор -->
+        <!-- Выбор ресторана -->
 
 
-        <!-- Меню -->
-        <section class="gal container-fluid bg-light" style="display: none;" id="gal">
+        <!-- Меню заказа -->
+        <section class="gal container-fluid bg-light" id="gal">
             <div class="text-center py-5">
                 <h2 class="mb-3">Меню:</h2>
                 <div class="heading-line mx-auto bg-dark"></div>
             </div>
 
-            <div class="row d-flex" style="justify-content: space-around; text-align: center;">
+            <div class="row d-flex justify-content-around text-center">
                 <div class="col-lg-4 col-md-6 p-0 dark">
                     <div class="card-body">
                         <img src="img/2.2.png" width="200px" alt="logo" class="rounded">
                         <h5 class="card-title">Пицца "3 мяса"</h5>
                         <p class="card-text">Вы гарантируете себе вкусовое удовольствие.</p>
-                        <p class="card-text" id="set-1"></p>
+                        <p class="card-text price" id="set-1"></p>
                         <div class="btn-toolbar mb-3 justify-content-center" role="toolbar"
                         aria-label="Toolbar with button groups">
                         <div class="btn-group me-2 menuButt" role="group" aria-label="First group">
@@ -387,7 +384,7 @@
                         <img src="img/2.4.png" width="200px" alt="logo" class="rounded">
                         <h5 class="card-title">Картофель Фри</h5>
                         <p class="card-text">Всеми любимый обжареный в масле картофель.</p>
-                        <p class="card-text" id="set-2" ></p>
+                        <p class="card-text price" id="set-2" ></p>
                         <div class="btn-toolbar mb-3 justify-content-center" role="toolbar"
                             aria-label="Toolbar with button groups">
                             <div class="btn-group me-2 menuButt" role="group" aria-label="First group">
@@ -404,7 +401,7 @@
                         <img src="img/2.5.jpg" width="200px" alt="logo" class="rounded">
                         <h5 class="card-title">Грибной суп</h5>
                         <p class="card-text">Очень вкусный и полезеый.</p>
-                        <p class="card-text" id="set-3" ></p>
+                        <p class="card-text price" id="set-3" ></p>
                         <div class="btn-toolbar mb-3 justify-content-center" role="toolbar"
                             aria-label="Toolbar with button groups">
                             <div class="btn-group me-2 menuButt" role="group" aria-label="First group">
@@ -421,7 +418,7 @@
                         <img src="img/2.6.jpg" width="200px" alt="logo" class="rounded">
                         <h5 class="card-title">Курица с рисом</h5>
                         <p class="card-text">Сбалансированный и полезный готовый продукт.</p>
-                        <p class="card-text" id="set-4" ></p>
+                        <p class="card-text price" id="set-4" ></p>
                         <div class="btn-toolbar mb-3 justify-content-center" role="toolbar"
                             aria-label="Toolbar with button groups">
                             <div class="btn-group me-2 menuButt" role="group" aria-label="First group">
@@ -438,7 +435,7 @@
                         <img src="img/2.7.jpg" width="200px" alt="logo" class="rounded">
                         <h5 class="card-title">Свежавыжатый сок</h5>
                         <p class="card-text">Освежающий и полный ватиминами сок.</p>
-                        <p class="card-text" id="set-5" ></p>
+                        <p class="card-text price" id="set-5" ></p>
                         <div class="btn-toolbar mb-3 justify-content-center" role="toolbar"
                             aria-label="Toolbar with button groups">
                             <div class="btn-group me-2 menuButt" role="group" aria-label="First group">
@@ -455,7 +452,7 @@
                         <img src="img/2.1.jpg" width="200px" alt="logo" class="rounded">
                         <h5 class="card-title">Суши сет</h5>
                         <p class="card-text">Вкусные и всежие суши</p>
-                        <p class="card-text" id="set-6" ></p>
+                        <p class="card-text price" id="set-6" ></p>
                         <div class="btn-toolbar mb-3 justify-content-center" role="toolbar"
                             aria-label="Toolbar with button groups">
                             <div class="btn-group me-2 menuButt" role="group" aria-label="First group">
@@ -472,7 +469,7 @@
                         <img src="img/2.8.png" width="200px" alt="logo" class="rounded">
                         <h5 class="card-title">Фруктовый микс</h5>
                         <p class="card-text">Свежая нарезка из разных фруктов.</p>
-                        <p class="card-text" id="set-7" ></p>
+                        <p class="card-text price" id="set-7" ></p>
                         <div class="btn-toolbar mb-3 justify-content-center" role="toolbar"
                             aria-label="Toolbar with button groups">
                             <div class="btn-group me-2 menuButt" role="group" aria-label="First group">
@@ -489,7 +486,7 @@
                         <img src="img/2.3.jpg" width="200px" alt="logo" class="rounded">
                         <h5 class="card-title">Бургер</h5>
                         <p class="card-text">Много мяса, мало теста.</p>
-                        <p class="card-text" id="set-8" ></p>
+                        <p class="card-text price" id="set-8" ></p>
                         <div class="btn-toolbar mb-3 justify-content-center" role="toolbar"
                             aria-label="Toolbar with button groups">
                             <div class="btn-group me-2 menuButt" role="group" aria-label="First group">
@@ -506,7 +503,7 @@
                         <img src="img/2.9.jpeg" width="200px" alt="logo" class="rounded">
                         <h5 class="card-title">Паста "Карбонара"</h5>
                         <p class="card-text">Вкусная паста у вас дома.</p>
-                        <p class="card-text" id="set-9" ></p>
+                        <p class="card-text price" id="set-9" ></p>
                         <div class="btn-toolbar mb-3 justify-content-center" role="toolbar"
                             aria-label="Toolbar with button groups">
                             <div class="btn-group me-2 menuButt" role="group" aria-label="First group">
@@ -523,7 +520,7 @@
                         <img src="img/2.10.jpg" width="200px" alt="logo" class="rounded">
                         <h5 class="card-title">Запечённые овощи</h5>
                         <p class="card-text">Низколорийный и натуральный продукт</p>
-                        <p class="card-text" id="set-10" ></p>
+                        <p class="card-text price" id="set-10" ></p>
                         <div class="btn-toolbar mb-3 justify-content-center" role="toolbar"
                             aria-label="Toolbar with button groups">
                             <div class="btn-group me-2 menuButt" role="group" aria-label="First group">
@@ -535,38 +532,171 @@
                     </div>
                 </div>
             </div>
-
+            <!-- Меню заказа -->
         </section>
-        
-        
-
+        <!-- Доп опции -->
         <section class="contacts container">
             <div class="text-left py-5">
-                <h2 class="mb-3">Дополнительные опции</h2>
+                <h2 class="mb-3 text-center">Дополнительные опции</h2>
                 <div class="heading-line mx-auto bg-dark"></div>
                 <div class="heading-line mx-auto"></div>
-            </div> 
-            <div>
-                <p>
-                    <label>
-                        <input type="checkbox" value="">
-                        В 2 раза больше
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input type="checkbox" value="">
-                        только горячим
-                    </label>
-                </p>
             </div>
-            <div class="d-flex riw justify-content-between my-3 py-2 px-2 border border-4">
-                <h1>Итого:<span class="prise fs-3">res</span></h1>
-                <input type="button" value="Оформить заказ">
+            <div class="d-flex row justify-content-around border border-4 border-bottom-0">
+                <div class="max-width: fit-content;">
+                    <label>
+                        В два раза больше
+                    </label>
+                    <input type="checkbox" id="socialka" value="">
+                </div>
+                <div class="max-width: fit-content;">
+                    <label>
+                        Только горячим
+                    </label>
+                    <input type="checkbox" value="">
+                </div>
             </div>
-        </section>
-        <!-- Меню -->
+            <!-- Доп опции -->
+            <div class="d-flex row justify-content-between    my-3 py-2 px-2 border border-4 border-top-0">
+                <h1>Итого:<span class=" fs-1" id="summary"></span></h1>
+                    <!-- Кнопка-триггер модального окна -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Запустить модальное окно со статическим фоном
+                </button>
+            </div>
+            <!-- Модальное окно -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Оформление заказа</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <h5>Позиции заказа</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <div class="d-flex">
+                                            <img>
+                                            <h6>Название</h6>
+                                        </div>
+                                        <div>
+                                            <p>2x100&#8381;</p>
+                                        </div>
+                                        <div>
+                                            <h6>200&#8381;</h6>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="options">
+                                <h5>Дополнительные опции</h5>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p>В два раза больше:</p>
+                                        <p>Только горячим:</p>
+                                    </div>
+                                    <div id="options-container">
+        
+                                
+                                </div>
+                            </div>
+                            <div>
+                                <h5>Информация о предприятии</h5>
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Название</p>
+                                    </div>
+                                    <div class="col">
+                                        <p id="modal-name"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Административный округ</p>
+                                    </div>
+                                    <div class="col">
+                                        <p id="modal-AU"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Район</p>
+                                    </div>
+                                    <div class="col">
+                                        <p id="modal-district"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Адрес</p>
+                                    </div>
+                                    <div class="col">
+                                        <p id="modal-address"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Рейтинг</p>
+                                    </div>
+                                    <div class="col">
+                                        <p id="modal-rating"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h5>Доставка</h5>
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Зона доставки:</p>
+                                    </div>
+                                    <div class="col">
+                                        <select class="form-select" name="" id="">
+                                            <option value="">Первая зона</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Адрес доставки:</p>
+                                    </div>
+                                    <div class="col">
+                                        <textarea class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Стоимость доставки:</p>
+                                    </div>
+                                    <div class="col">
+        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p>ФИО получателя:</p>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" type="text" name="" id="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h5>Итого: </h5>
+        
+                            </div>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="order">Подтвердить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+        </section>
+        <!-- Модальное окно -->
         <!-- footer -->
         <footer class="footer">
             <div class="py-3 text-center text-dark">
@@ -594,6 +724,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
-        <!-- footer -->
+        <!-- skript -->
 </body>
 </html>

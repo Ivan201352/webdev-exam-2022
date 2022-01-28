@@ -1,33 +1,38 @@
 let maketOfDude
+let currentCom = 0;
 window.onload = function () {
     maketOfDude = document.getElementById('companyItem-template').cloneNode(true);
 
     GetInformationAboutCom();
-    console.log(maketOfDude);
     addListenerFindBtn();
+
+    document.getElementById('socialka').addEventListener('change', socialSale);
 
     let menuButt = document.querySelectorAll('.menuButt');
     menuButt.forEach(function (btn) {
-        btn.addEventListener('click', setFunk)
+        btn.addEventListener('click', set)
     })
+    
 }
 let data
+let globSum
 
-function setFunk(event) {
+function set(event) {
     let oper = event.target.innerHTML;
-    // let idE = event.currentTarget.children('.pole').id;
-    // alert(idE);
     let pole = event.target.closest('.menuButt').querySelector('.pole');
-    let clicks = 0;
+    let price = Number(String(event.target.closest('.card-body').querySelector('.price').innerHTML).slice(0, -2));
+    let summary = document.getElementById('summary');
     switch(oper){
         case '+':
-            // alert("+")
                 pole.innerHTML = Number(pole.innerHTML) + 1;
+                summary.innerHTML = Number(summary.innerHTML) + price ;
+                globSum = summary.innerHTML;
             break
         case '-':
-            // alert("-")
                 if (pole.innerHTML != 0 && pole.innerHTML != NaN){
                     pole.innerHTML = Number(pole.innerHTML) - 1;
+                summary.innerHTML = Number(summary.innerHTML) - price ;
+                globSum = summary.innerHTML;
                 }
             break
     }
@@ -45,7 +50,7 @@ function GetInformationAboutCom() {
     xhr.responseType = 'json';
     xhr.onload = function () {
         console.log(this.response);
-        GETSpisok(this.response);
+        sortComElements(this.response);
         data = this.response
     }
     xhr.send();
@@ -56,9 +61,6 @@ function sortComElements(array) {
     let counter = 0
     sortByR(array);
     while (counter < 5){
-        // for (let element of array) {
-        //     companyList.append(createComBlock(element));
-        // }
         counter = counter + 1
         companyList.append(createComBlock(array[counter]))
     }
@@ -82,8 +84,6 @@ function createComBlock(company) {
 }
 
 function createComBlockforFilter(company) {
-    console.log(maketOfDude);
-    // let item = document.getElementById('companyItem-template').cloneNode(true);
     let item = maketOfDude.cloneNode(true);
     item.querySelector('.company-name').innerHTML = company['name'];
     item.querySelector('.company-type').innerHTML = company['typeObject'];
@@ -97,9 +97,36 @@ function createComBlockforFilter(company) {
 
     item.querySelector(".chooseButt").addEventListener('click', event => {createMenu(company['id'])} )
     item.classList.add("new"); //класс для последующего удаления в использовании фильтров
-    console.log(item);
     return item;
 }
+
+function socialnSale() {
+    let checkbox = document.getElementById('socialka');
+    if (checkbox.checked == true){
+        if( currentCom["socialPrivileges"] == true){
+            globSum = globSum *  (100 -currentCom["socialDiscount"]) / 100
+
+
+        }
+        else{
+            document.getElementById('socialka').disabled;
+        }
+    }
+    else{
+        if( currentCom["socialPrivileges"] == true){
+            globSum = globSum / (100 -currentCom["socialDiscount"]) *100
+        }
+        else{
+            document.getElementById('socialka').disabled;
+        }
+    }
+    document.getElementById('summary').innerHTML = globSum
+}
+
+function xTwo(params) {
+
+}
+
 function sortByR(array) { 
     array.sort()
     array.sort(function (a, b) {
@@ -114,12 +141,12 @@ function sortByR(array) {
 }
 
 function createMenu(id){
-    // alert(id);
     let menu = document.getElementById('gal');
     menu.style.display = 'block';
     console.log(data);
     data.forEach(element => {
         if (element['id'] == id ){
+            currentCom = element;
             document.getElementById('set-1').innerHTML = element['set_1'] + " Р";
             document.getElementById('set-2').innerHTML = element['set_2'] + " Р";
             document.getElementById('set-3').innerHTML = element['set_3'] + " Р";
@@ -142,23 +169,18 @@ function addListenerFindBtn() {
     divs.forEach(el => el.addEventListener('click', event => {
         var filter1 = document.getElementById("select");
         var area = filter1.options[filter1.selectedIndex].text;
-
         var filter2 = document.getElementById("selec");
         var district = filter2.options[filter2.selectedIndex].text;
-
         var filter3 = document.getElementById("sele");
         var type = filter3.options[filter3.selectedIndex].text;
-
         var filter4 = document.getElementById("sel");
         var discount = filter4.options[filter4.selectedIndex].text;
-
         sortArray(data, district, area, type, discount)
     }));
 }
 
 function sortArray(array, district, area, type, discount) {
     let companyList = document.querySelector('.company-list');
-    // companyList.remove(".new");
     ///todo нужно очисть массив от прошлых данных companyList.remove()
     let activeCounter = 0// это счетчик именно элементов массива которые удовлетворяют сортировки
     let counter = 0// индек элемента в массиве
@@ -166,20 +188,6 @@ function sortArray(array, district, area, type, discount) {
     while (activeCounter < 20 && counter < array.length - 2) {
         counter = counter + 1
         let current = array[counter + 1]
-        // if (current['district'] == district
-        //     && current['admArea'] == area
-        //     && current['typeObject'] == type
-        //     && current['socialDiscount'] == discount) {
-        //     activeCounter = activeCounter + 1
-        //     companyList.append(createComBlock(array[counter]))
-        // }
-        let point = 0
-
-
-
-        console.log(current['district'], current['admArea'], current['typeObject'], current['socialDiscount'] );
-        console.log(district, area, type, discount);
-
         if(district == "Не выбрано"){
             point = point + 1 
         }
@@ -208,16 +216,13 @@ function sortArray(array, district, area, type, discount) {
             point = point + 1 
         }
         else{
-            if(current['socialDiscount'] == discount) {
+            if(current['socialDiscount'] >0) {
             point = point + 1
             }
         }
-
         if(point == 4){ 
-            console.log(maketOfDude);
             activeCounter = activeCounter + 1
             companyList.append(createComBlockforFilter(array[counter + 1]))
-            console.log("joopa")
         }
     }
 }
