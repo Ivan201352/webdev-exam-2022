@@ -1,0 +1,26 @@
+.shopping-cart {
+    width: 30px;
+}
+
+.images-slider {
+    height: 300px;
+}
+
+@media (orientation: portrait) {
+    .images-slider {
+        height: 150px;
+    }
+}
+
+header {
+    z-index: 2;
+}
+
+.modal-menu-img {
+    height: 50px;
+    width: 50px;
+}
+
+.img-div {
+    height: 220px;
+}
