@@ -35,6 +35,33 @@ window.onload = function () {
     }
 }
 
+function choosedCompany(event) {
+    let id = event.target.closest('.list-group-item').id;
+
+    let url_add = "http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants/" + id;
+    let api_key = "37405276-3222-433a-b5ad-48208caaf72b";
+
+    let url = new URL(url_add);
+    url.searchParams.append("api_key", api_key);
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.responseType = 'json';
+    xhr.onload = function () {
+        createMenu(this.response);
+        GiveInfoToModal(this.response);
+    }
+    xhr.send();
+}
+
+function modalCurrCount(elem) {
+    let menuCont = document.querySelector('.menu-container');
+    for (let item of menuCont.querySelectorAll('.menu-item')) {
+        if (elem.querySelector('.modal-menu-name').innerHTML == item.querySelector('.menu-name').innerHTML) {
+            return item.querySelector('.menu-input').value;
+        }
+    }
+}
+
 function showProblem(msg, color, place) {
     let container = document.querySelector('.alerts');
     let alert = container.querySelector('#alert-template').cloneNode(true);
@@ -50,14 +77,6 @@ function showProblem(msg, color, place) {
         modalContainer.append(alert);
 }
 
-function modalCurrCount(elem) {
-    let menuCont = document.querySelector('.menu-container');
-    for (let item of menuCont.querySelectorAll('.menu-item')) {
-        if (elem.querySelector('.modal-menu-name').innerHTML == item.querySelector('.menu-name').innerHTML) {
-            return item.querySelector('.menu-input').value;
-        }
-    }
-}
 
 function onGorBtn(target) {
     let cont = document.querySelector('.modal-menu-info');
@@ -393,23 +412,6 @@ function poiskElem(areas, elem, key) {
     return false;
 }
 
-function choosedCompany(event) {
-    let id = event.target.closest('.list-group-item').id;
-
-    let url_add = "http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants/" + id;
-    let api_key = "b47b35cf-b327-43d6-9683-88e83dd06714";
-
-    let url = new URL(url_add);
-    url.searchParams.append("api_key", api_key);
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
-    xhr.responseType = 'json';
-    xhr.onload = function () {
-        createMenu(this.response);
-        GiveInfoToModal(this.response);
-    }
-    xhr.send();
-}
 
 function GiveInfoToModal(element) {
     let modal = document.querySelector('.modal');

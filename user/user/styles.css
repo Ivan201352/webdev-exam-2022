@@ -24,3 +24,6 @@ header {
 .img-div {
     height: 220px;
 }
+.bg-primary {
+    background-color: #C51D34!important;
+}
