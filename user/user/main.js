@@ -1,19 +1,15 @@
 let areas = [], types = [];
 
-function getRandomNum(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 window.onload = function () {
     Data(1, '');
 
     document.querySelector('.findBtn').onclick = function () {
         filtertake();
     }
-    document.querySelector('#admAreaInput').onchange = function () {
+    document.querySelector('#OkrugInp').onchange = function () {
         givefiltres('admArea', '');
     }
-    document.querySelector('#districtInput').onchange = function () {
+    document.querySelector('#RaionInp').onchange = function () {
         givefiltres('district', '');
     }
     document.querySelector('.pagination').onclick = pagination;
@@ -163,10 +159,10 @@ function onX2Btn(target) {
 function filtertake(page = 1) {
     let form = document.querySelector('form');
     let filter = {
-        'admArea': form.elements['admAreaInput'].value,
-        'district': form.elements['districtInput'].value,
-        'typeObject': form.elements['typeInput'].value,
-        'discount': form.elements['discountInput'].value
+        'admArea': form.elements['OkrugInp'].value,
+        'district': form.elements['RaionInp'].value,
+        'typeObject': form.elements['TipInp'].value,
+        'discount': form.elements['SkidkaInp'].value
     };
     if (filter['admArea'] == '' && filter['district'] == '' && filter['typeObject'] == '') filter['isFilter'] = false;
     else filter['isFilter'] = true;
@@ -324,8 +320,8 @@ function givefiltres(event, array = '') {
         }
     }
 
-    let admAreaFilter = containerFiltres.querySelector('#admAreaInput');
-    let districtFilter = containerFiltres.querySelector('#districtInput');
+    let admAreaFilter = containerFiltres.querySelector('#OkrugInp');
+    let districtFilter = containerFiltres.querySelector('#RaionInp');
 
     if (event == 'district') {
         let temp;
@@ -371,7 +367,7 @@ function givefiltres(event, array = '') {
         }
     }
 
-    let typeFilter = containerFiltres.querySelector('#typeInput');
+    let typeFilter = containerFiltres.querySelector('#TipInp');
 
     if (!typeFilter.value) {
         typeFilter.innerHTML = '';
@@ -384,7 +380,7 @@ function givefiltres(event, array = '') {
         }
     }
 
-    let discountFilter = containerFiltres.querySelector('#discountInput');
+    let discountFilter = containerFiltres.querySelector('#SkidkaInp');
     discountFilter.innerHTML = '';
     discountFilter.append(document.createElement('option'));
 
