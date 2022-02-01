@@ -1,9 +1,7 @@
-let areas = [], types = [];
-
 window.onload = function () {
     Data(1, '');
 
-    document.querySelector('.findBtn').onclick = function () {
+    document.querySelector('.searbutt').onclick = function () {
         filtertake();
     }
     document.querySelector('#OkrugInp').onchange = function () {
@@ -13,12 +11,12 @@ window.onload = function () {
         givefiltres('district', '');
     }
     document.querySelector('.pagination').onclick = pagination;
-    document.querySelector('.checkBtnContainer').onclick = function (event) {
-        if (event.target == document.querySelector('.checkBtnContainer'))
+    document.querySelector('.zakazcheckContainer').onclick = function (event) {
+        if (event.target == document.querySelector('.zakazcheckContainer'))
             showProblem('Вы ничего не выбрали', 'warning', 'main');
     }
     document.querySelector('.modal-buttons').onclick = function (event) {
-        if (event.target.querySelector('.accept-btn').disabled) {
+        if (event.target.querySelector('.provarkazakbutt').disabled) {
             showProblem('Ошибка, заполните пожалуйста полностью', 'warning', 'modal');
             document.querySelector('.modal').classList.add('fade');
         }
@@ -30,6 +28,8 @@ window.onload = function () {
         onGorBtn(event.target);
     }
 }
+
+let zone = [], category = [];
 
 function choosedCompany(event) {
     let id = event.target.closest('.list-group-item').id;
@@ -303,15 +303,15 @@ function givefiltres(event, array = '') {
             type = element["typeObject"];
             districts = new Array();
 
-            if (types.indexOf(type) == -1) {
-                types.push(type);
+            if (category.indexOf(type) == -1) {
+                category.push(type);
             }
 
-            if (!poiskElem(areas, admArea, 'admArea')) {
-                areas.push({ "admArea": admArea, "district": districts });
+            if (!poiskElem(zone, admArea, 'admArea')) {
+                zone.push({ "admArea": admArea, "district": districts });
             }
-            if (!poiskElem(areas, district, 'district')) {
-                for (let item of areas) {
+            if (!poiskElem(zone, district, 'district')) {
+                for (let item of zone) {
                     if (item['admArea'] == admArea) {
                         item['district'].push(district);
                     }
@@ -325,7 +325,7 @@ function givefiltres(event, array = '') {
 
     if (event == 'district') {
         let temp;
-        for (let elem of areas) {
+        for (let elem of zone) {
             for (let item of elem['district']) {
                 if (item == districtFilter.value) {
                     temp = elem['admArea'];
@@ -337,7 +337,7 @@ function givefiltres(event, array = '') {
     if (event == 'admArea') {
         districtFilter.innerHTML = '';
         districtFilter.append(document.createElement('option'));
-        for (let elem of areas) {
+        for (let elem of zone) {
             if (admAreaFilter.value == elem['admArea']) {
                 for (let item of elem['district']) {
                     let option = document.createElement('option');
@@ -353,12 +353,12 @@ function givefiltres(event, array = '') {
         districtFilter.innerHTML = '';
         districtFilter.append(document.createElement('option'));
 
-        for (let elem of areas) {
+        for (let elem of zone) {
             let option = document.createElement('option');
             option.innerHTML = elem['admArea'];
             admAreaFilter.append(option);
         }
-        for (let elem of areas) {
+        for (let elem of zone) {
             for (let item of elem['district']) {
                 let option = document.createElement('option');
                 option.innerHTML = item;
@@ -373,7 +373,7 @@ function givefiltres(event, array = '') {
         typeFilter.innerHTML = '';
         typeFilter.append(document.createElement('option'));
 
-        for (let elem of types) {
+        for (let elem of category) {
             let option = document.createElement('option');
             option.innerHTML = elem;
             typeFilter.append(option);
@@ -393,13 +393,13 @@ function givefiltres(event, array = '') {
     discountFilter.append(option);
 }
 
-function poiskElem(areas, elem, key) {
+function poiskElem(zone, elem, key) {
     if (key == 'admArea') {
-        for (let element of areas) {
+        for (let element of zone) {
             if (element['admArea'] == elem) return true;
         }
     } else if (key == 'district') {
-        for (let element of areas) {
+        for (let element of zone) {
             for (let item of element['district']) {
                 if (item == elem) return true;
             }
