@@ -61,67 +61,23 @@ function modalCurrCount(elem) {
 function showProblem(msg, color, place) {
     let container = document.querySelector('.alerts');
     let alert = container.querySelector('#alert-template').cloneNode(true);
-    let modalContainer = document.querySelector('.modal-alerts');
-
+    let ModalList = document.querySelector('.modal-alerts');
     alert.classList.add('alert-' + color);
     alert.querySelector('.msg').innerHTML = msg;
     alert.classList.remove('d-none');
-
     if (place == 'main')
         container.append(alert);
     if (place == 'modal')
-        modalContainer.append(alert);
+    ModalList.append(alert);
 }
 
 
 function onGorBtn(target) {
     let cont = document.querySelector('.modal-menu-info');
-    if (target.checked) {
-        for (let elem of cont.querySelectorAll('.modal-menu-element')) {
-            let price = elem.querySelector('.modal-menu-price').innerHTML;
-            let count = modalCurrCount(elem);
-            
-            if (document.querySelector('#option-2').checked) {
-                let name = document.querySelector('.modal-option-2').querySelector('.modal-menu-name').innerHTML;
-                if (name == elem.querySelector('.modal-menu-name').innerHTML) {
-                    elem.querySelector('.modal-menu-count').innerHTML = Number(count);
-                    elem.querySelector('.modal-menu-sum').innerHTML = count * price;
-                } else {
-                    elem.querySelector('.modal-menu-count').innerHTML = count;
-                    elem.querySelector('.modal-menu-sum').innerHTML = count * price;
-                }
-            } else {
-                elem.querySelector('.modal-menu-count').innerHTML = count;
-                elem.querySelector('.modal-menu-sum').innerHTML = count * price;
-            }
-        }
-        let total = document.querySelector('.totalPrice').innerHTML;
-        document.querySelector('.totalPrice').innerHTML = total;
-        document.querySelector('.modal-total-price').innerHTML = total;
-        document.querySelector('.modal-option-gor').innerHTML = '-30% (Если заказ будет холодным)';
-    } else {
-        for (let elem of cont.querySelectorAll('.modal-menu-element')) {
-            let count = modalCurrCount(elem);
-            let price = elem.querySelector('.modal-menu-price').innerHTML;
-
-            if (document.querySelector('#option-2').checked) {
-                let name = document.querySelector('.modal-option-2').querySelector('.modal-menu-name').innerHTML;
-                if (name == elem.querySelector('.modal-menu-name').innerHTML) {
-                    elem.querySelector('.modal-menu-count').innerHTML = Number(count);
-                    elem.querySelector('.modal-menu-sum').innerHTML = count * price;
-                } else {
-                    elem.querySelector('.modal-menu-count').innerHTML = count;
-                    elem.querySelector('.modal-menu-sum').innerHTML = count * price;
-                }
-            } else {
-                elem.querySelector('.modal-menu-count').innerHTML = count;
-                elem.querySelector('.modal-menu-sum').innerHTML = count * price;
-            }
-        }
-        let total = document.querySelector('.totalPrice').innerHTML;
-        document.querySelector('.totalPrice').innerHTML = total;
-        document.querySelector('.modal-total-price').innerHTML = total;
-    }
+    let total = document.querySelector('.totalPrice').innerHTML;
+    document.querySelector('.totalPrice').innerHTML = total;
+    document.querySelector('.modal-total-price').innerHTML = total;
+    document.querySelector('.modal-option-gor').innerHTML = '-30% (Если заказ будет холодным)';
 }
 
 function onX2Btn(target) {
