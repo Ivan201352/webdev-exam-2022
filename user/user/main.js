@@ -86,56 +86,38 @@ function onX2Btn(target) {
         document.querySelector('.modal-option-2').innerHTML = '';
         let num = 0;
         let i = 0;
-        for (let elem of cont.querySelectorAll('.modal-menu-element')) {
-            i += 1;
-            if (i == num) {
-                let elemClone = elem.cloneNode(true);
-                elemClone.classList.remove('d-none');
+        let  = elem.cloneNode(true);
+                v2bols.classList.remove('d-none');
                 elem.querySelector('.modal-menu-count').innerHTML = Number(elem.querySelector('.modal-menu-count').innerHTML) + 1;
                 elem.classList.remove('d-none');
-                elemClone.querySelector('.modal-menu-count').innerHTML = 1;
-                elemClone.querySelector('.modal-menu-sum').innerHTML = 0;
-                document.querySelector('.modal-option-2').append(elemClone);
-            }
-        }
-    } else {
-        let name = document.querySelector('.modal-option-2').querySelector('.modal-menu-name').innerHTML;
-        document.querySelector('.modal-option-2').innerHTML = '';
-        let menuItem = findModalMenuItem(cont, name);
-        console.log(menuItem);
-        menuItem.querySelector('.modal-menu-count').innerHTML = Number(menuItem.querySelector('.modal-menu-count').innerHTML) - 1;
-        if (menuItem.querySelector('.modal-menu-count').innerHTML == 0) {
-            menuItem.classList.add('d-none');
-            menuItem.querySelector('.modal-menu-count').innerHTML = '';
-        }
-        document.querySelector('.modal-option-2').innerHTML = 'нет';
+                v2bols.querySelector('.modal-menu-count').innerHTML = 1;
+                v2bols.querySelector('.modal-menu-sum').innerHTML = 0;
+                document.querySelector('.modal-option-2').append(v2bols);
     }
 }
 
 function filtertake(page = 1) {
     let form = document.querySelector('form');
-    let filter = {
+    let filtr = {
         'admArea': form.elements['OkrugInp'].value,
         'district': form.elements['RaionInp'].value,
         'typeObject': form.elements['TipInp'].value,
         'discount': form.elements['SkidkaInp'].value
     };
-    if (filter['admArea'] == '' && filter['district'] == '' && filter['typeObject'] == '') filter['isFilter'] = false;
-    else filter['isFilter'] = true;
+    if (filtr['admArea'] == '' && filtr['district'] == '' && filtr['typeObject'] == '') filtr['isFilter'] = false;
+    else filtr['isFilter'] = true;
 
-    Data(page, filter);
+    Data(page, filtr);
 }
 
 function Data(page = 1, filter = '') {
     let url_add = "http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants";
     let api_key = "37405276-3222-433a-b5ad-48208caaf72b";
-
     let url = new URL(url_add);
     url.searchParams.append("api_key", api_key);
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url);
     xhr.responseType = 'json';
-
     xhr.onload = function () {
         GiveCompanyL(this.response, page, filter);
         givefiltres('', this.response);
@@ -144,43 +126,40 @@ function Data(page = 1, filter = '') {
 }
 
 function GiveCompanyL(array, page, filter = '') {
-    let companyList = document.querySelector('.company-list');
-    companyList.innerHTML = '';
+    let spisokComp = document.querySelector('.company-list');
+    spisokComp.innerHTML = '';
     let count = 0, start, end;
-    let companies = [];
+    let restorant = [];
 
     if (filter['isFilter']) {
         for (let elem of array) {
             if ((filter['admArea'] ? filter['admArea'] == elem['admArea'] : 1) &&
                 (filter['district'] ? filter['district'] == elem['district'] : 1) &&
                 (filter['typeObject'] ? filter['typeObject'] == elem['typeObject'] : 1)) {
-                companies.push(elem);
+                restorant.push(elem);
                 count++;
             }
         }
     } else {
         for (let elem of array) {
             count++;
-            companies.push(elem);
+            restorant.push(elem);
         }
     }
 
-    ComeSortedArray(companies, 'rate');
-    console.log(companies);
+    RatingSort(restorant, 'rate');
+    console.log(restorant);
 
     let max_page = Math.ceil(count / 10);
     start = page * 10 - 10;
     (page < max_page) ? end = page * 10 : end = count;
-
     for (let i = start; i < end; ++i) {
-        companyList.append(createCompElem(companies[i]));
+        spisokComp.append(createCompElem(restorant[i]));
     }
-
     for (let btn of document.querySelectorAll('.chooseBtn')) {
         btn.onclick = choosedCompany;
     }
-
-    createPagination(page, max_page);
+    SpisokPagination(page, max_page);
 }
 
 function createCompElem(company) {
@@ -196,14 +175,14 @@ function createCompElem(company) {
     return item;
 }
 
-function createPagination(page, max_page) {
+function SpisokPagination(page, max_page) {
     let item = document.querySelector('.page-item').cloneNode(true);
-    let pagCont = document.querySelector('.pagination');
-    pagCont.innerHTML = '';
+    let StrPagin = document.querySelector('.pagination');
+    StrPagin.innerHTML = '';
 
-    item.querySelector('.page-link').innerHTML = "Предыдущая";
+    item.querySelector('.page-link').innerHTML = "Пред";
     item.classList.remove('d-none');
-    pagCont.append(item);
+    StrPagin.append(item);
 
     for (let i = page - 2; i < page + 3; ++i) {
         if (i > 0 && i < max_page + 1) {
@@ -212,34 +191,34 @@ function createPagination(page, max_page) {
             item.querySelector('.page-link').innerHTML = i;
             item.classList.remove('d-none');
             if (i == page) item.classList.add('active');
-            pagCont.append(item);
+            StrPagin.append(item);
         }
     }
 
     item = item.cloneNode(true);
-    item.querySelector('.page-link').innerHTML = "Следующая";
+    item.querySelector('.page-link').innerHTML = "След";
     item.classList.remove('active');
     item.classList.remove('d-none');
-    pagCont.append(item);
+    StrPagin.append(item);
 }
 
 function pagination(event) {
     let currentPage = Number(document.querySelector(".pagination").querySelector(".active").querySelector(".page-link").innerHTML);
-    let newPage = event.target.innerHTML;
+    let NewPagin = event.target.innerHTML;
 
-    if (newPage == 'Предыдущая' && currentPage != 1) filtertake(currentPage - 1);
-    else if (newPage == 'Следующая') filtertake(currentPage + 1);
-    else if (newPage == currentPage) { }
-    else filtertake(Number(newPage));
+    if (NewPagin == 'Пред' && currentPage != 1) filtertake(currentPage - 1);
+    else if (NewPagin == 'След') filtertake(currentPage + 1);
+    else if (NewPagin == currentPage) { }
+    else filtertake(Number(NewPagin));
 }
 
-function ComeSortedArray(array, key) {
-    let flag = true, tmp;
-    while (flag) {
-        flag = false;
+function RatingSort(array, key) {
+    let banner = true, tmp;
+    while (banner) {
+        banner = false;
         for (let i = 1; i < array.length; ++i) {
             if (array[i - 1][key] < array[i][key]) {
-                flag = true;
+                banner = true;
                 tmp = array[i - 1];
                 array[i - 1] = array[i];
                 array[i] = tmp;
@@ -249,104 +228,103 @@ function ComeSortedArray(array, key) {
 }
 
 function givefiltres(event, array = '') {
-    let containerFiltres = document.querySelector(".filters");
-    let admArea, district, districts, type;
-
+    let filterbox = document.querySelector(".filters");
+    let admOkr, raion, districts, tip;
     if (array) {
         for (let element of array) {
-            admArea = element["admArea"];
-            district = element["district"];
-            type = element["typeObject"];
+            admOkr = element["admArea"];
+            raion = element["district"];
+            tip = element["typeObject"];
             districts = new Array();
 
-            if (category.indexOf(type) == -1) {
-                category.push(type);
+            if (category.indexOf(tip) == -1) {
+                category.push(tip);
             }
 
-            if (!poiskElem(zone, admArea, 'admArea')) {
-                zone.push({ "admArea": admArea, "district": districts });
+            if (!poiskElem(zone, admOkr, 'admArea')) {
+                zone.push({ "admArea": admOkr, "district": districts });
             }
-            if (!poiskElem(zone, district, 'district')) {
+            if (!poiskElem(zone, raion, 'district')) {
                 for (let item of zone) {
-                    if (item['admArea'] == admArea) {
-                        item['district'].push(district);
+                    if (item['admArea'] == admOkr) {
+                        item['district'].push(raion);
                     }
                 }
             }
         }
     }
 
-    let admAreaFilter = containerFiltres.querySelector('#OkrugInp');
-    let districtFilter = containerFiltres.querySelector('#RaionInp');
+    let okrugFilter = filterbox.querySelector('#OkrugInp');
+    let raionFilter = filterbox.querySelector('#RaionInp');
 
     if (event == 'district') {
-        let temp;
+        let int;
         for (let elem of zone) {
             for (let item of elem['district']) {
-                if (item == districtFilter.value) {
-                    temp = elem['admArea'];
+                if (item == raionFilter.value) {
+                    int = elem['admArea'];
                 }
             }
         }
-        admAreaFilter.value = temp;
+        okrugFilter.value = int;
     }
     if (event == 'admArea') {
-        districtFilter.innerHTML = '';
-        districtFilter.append(document.createElement('option'));
+        raionFilter.innerHTML = '';
+        raionFilter.append(document.createElement('option'));
         for (let elem of zone) {
-            if (admAreaFilter.value == elem['admArea']) {
+            if (okrugFilter.value == elem['admArea']) {
                 for (let item of elem['district']) {
                     let option = document.createElement('option');
                     option.innerHTML = item;
-                    districtFilter.append(option);
+                    raionFilter.append(option);
                 }
             }
         }
     }
-    if (!admAreaFilter.value && !districtFilter.value) {
-        admAreaFilter.innerHTML = '';
-        admAreaFilter.append(document.createElement('option'));
-        districtFilter.innerHTML = '';
-        districtFilter.append(document.createElement('option'));
+    if (!okrugFilter.value && !raionFilter.value) {
+        okrugFilter.innerHTML = '';
+        okrugFilter.append(document.createElement('option'));
+        raionFilter.innerHTML = '';
+        raionFilter.append(document.createElement('option'));
 
         for (let elem of zone) {
             let option = document.createElement('option');
             option.innerHTML = elem['admArea'];
-            admAreaFilter.append(option);
+            okrugFilter.append(option);
         }
         for (let elem of zone) {
             for (let item of elem['district']) {
                 let option = document.createElement('option');
                 option.innerHTML = item;
-                districtFilter.append(option);
+                raionFilter.append(option);
             }
         }
     }
 
-    let typeFilter = containerFiltres.querySelector('#TipInp');
+    let tipFilter = filterbox.querySelector('#TipInp');
 
-    if (!typeFilter.value) {
-        typeFilter.innerHTML = '';
-        typeFilter.append(document.createElement('option'));
+    if (!tipFilter.value) {
+        tipFilter.innerHTML = '';
+        tipFilter.append(document.createElement('option'));
 
         for (let elem of category) {
             let option = document.createElement('option');
             option.innerHTML = elem;
-            typeFilter.append(option);
+            tipFilter.append(option);
         }
     }
 
-    let discountFilter = containerFiltres.querySelector('#SkidkaInp');
-    discountFilter.innerHTML = '';
-    discountFilter.append(document.createElement('option'));
+    let skidkaFilter = filterbox.querySelector('#SkidkaInp');
+    skidkaFilter.innerHTML = '';
+    skidkaFilter.append(document.createElement('option'));
 
     let option = document.createElement('option');
     option.innerHTML = 'Да';
-    discountFilter.append(option);
+    skidkaFilter.append(option);
 
     option = document.createElement('option');
     option.innerHTML = 'Нет';
-    discountFilter.append(option);
+    skidkaFilter.append(option);
 }
 
 function poiskElem(zone, elem, key) {
