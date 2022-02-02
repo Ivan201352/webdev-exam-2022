@@ -344,22 +344,22 @@ function poiskElem(zone, elem, key) {
 
 
 function GiveInfoToModal(element) {
-    let modal = document.querySelector('.modal');
-    modal.querySelector('.modal-company-name').innerHTML = element['name'];
-    modal.querySelector('.modal-company-admArea').innerHTML = element['admArea'];
-    modal.querySelector('.modal-company-district').innerHTML = element['district'];
-    modal.querySelector('.modal-company-address').innerHTML = element['address'];
-    modal.querySelector('.modal-company-rate').innerHTML = (Number(element['rate']) / 20).toString() + '&#7777';
+    let ModElem = document.querySelector('.modal');
+    ModElem.querySelector('.modal-company-name').innerHTML = element['name'];
+    ModElem.querySelector('.modal-company-admArea').innerHTML = element['admArea'];
+    ModElem.querySelector('.modal-company-district').innerHTML = element['district'];
+    ModElem.querySelector('.modal-company-address').innerHTML = element['address'];
+    ModElem.querySelector('.modal-company-rate').innerHTML = (Number(element['rate']) / 20).toString() + '&#7777';
 
-    let modalMenu = modal.querySelector('.modal-menu-info');
+    let modalMenu = ModElem.querySelector('.modal-menu-info');
     modalMenu.innerHTML = '';
     for (let i = 1; i <= 10; ++i) {
         let name = 'set_' + i;
-        modalMenu.append(createModalMenuElem(element[name], menu[i - 1]));
+        modalMenu.append(ModMenElem(element[name], menu[i - 1]));
     }
 }
 
-function createModalMenuElem(price, elem) {
+function ModMenElem(price, elem) {
     let item = document.querySelector('#modalMenuElem-template').cloneNode(true);
     item.querySelector('.modal-menu-name').innerHTML = elem['name'];
     item.querySelector('.modal-menu-img').setAttribute('src', elem['image']);
@@ -371,10 +371,10 @@ function createMenu(element) {
     let menuContainer = document.querySelector('.menu-container');
     if (menuContainer.innerHTML) {
         console.log(true);
-        let surp = document.querySelector('#option-2');
-        if (surp.checked) {
-            surp.checked = false;
-            onX2Btn(surp);
+        let X2 = document.querySelector('#option-2');
+        if (X2.checked) {
+            X2.checked = false;
+            onX2Btn(X2);
         }
         let onGroup = document.querySelector('#option-2');
         if (onGroup.checked) {
@@ -391,13 +391,13 @@ function createMenu(element) {
 
     for (let i = 1; i <= 10; ++i) {
         let name = 'set_' + i;
-        menuContainer.append(createMenuElem(element[name], menu[i - 1]));
+        menuContainer.append(menuPosition(element[name], menu[i - 1]));
     }
     for (let btn of document.querySelectorAll('.input-group')) {
         btn.onclick = function (event) {
             let name = event.target.closest('.menu-item').querySelector('.menu-name').innerHTML;
             let modalMenuInfo = document.querySelector('.modal-menu-info');
-            let menuItem = findModalMenuItem(modalMenuInfo, name);
+            let menuItem = modalMenuItem(modalMenuInfo, name);
 
             if (event.target.innerHTML == '+') {
                 btn.querySelector('.menu-input').value = Number(btn.querySelector('.menu-input').value) + 1;
@@ -425,8 +425,8 @@ function createMenu(element) {
 
                 menuItem.classList.remove('d-none');
                 if (document.querySelector('#option-2').checked) {
-                    let surpName = document.querySelector('.modal-option-2').querySelector('.modal-menu-name').innerHTML;
-                    if (menuItem.querySelector('.modal-menu-name').innerHTML == surpName) {
+                    let X2n = document.querySelector('.modal-option-2').querySelector('.modal-menu-name').innerHTML;
+                    if (menuItem.querySelector('.modal-menu-name').innerHTML == X2n) {
                         menuItem.querySelector('.modal-menu-count').innerHTML = count + 1;
                     } else {
                         menuItem.querySelector('.modal-menu-count').innerHTML = count;
@@ -438,14 +438,14 @@ function createMenu(element) {
             }
 
 
-            let totalSum = 0;
+            let FunalCheck = 0;
             for (let elem of modalMenuInfo.querySelectorAll('.modal-menu-element')) {
-                totalSum += Number(elem.querySelector('.modal-menu-sum').innerHTML);
+                FunalCheck += Number(elem.querySelector('.modal-menu-sum').innerHTML);
             }
-            document.querySelector('.totalPrice').innerHTML = totalSum;
-            document.querySelector('.modal-total-price').innerHTML = totalSum;
+            document.querySelector('.totalPrice').innerHTML = FunalCheck;
+            document.querySelector('.modal-total-price').innerHTML = FunalCheck;
 
-            if (totalSum == 0) document.querySelector(".checkBtn").setAttribute('disabled', 'disabled');
+            if (FunalCheck == 0) document.querySelector(".checkBtn").setAttribute('disabled', 'disabled');
             else document.querySelector(".checkBtn").disabled = false;
 
             if (isGroupOn) {
@@ -456,7 +456,7 @@ function createMenu(element) {
     }
 }
 
-function findModalMenuItem(cont, name) {
+function modalMenuItem(cont, name) {
     for (let menuItem of cont.querySelectorAll('.modal-menu-element')) {
         if (menuItem.querySelector('.modal-menu-name').innerHTML == name) {
             return menuItem;
@@ -464,7 +464,7 @@ function findModalMenuItem(cont, name) {
     }
 }
 
-function createMenuElem(price, elem) {
+function menuPosition(price, elem) {
     let item = document.querySelector('#menuItem-template').cloneNode(true);
     item.querySelector('.menu-name').innerHTML = elem['name'];
     item.querySelector('.menu-img').setAttribute('src', elem['image']);
