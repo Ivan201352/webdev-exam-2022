@@ -43,7 +43,7 @@ function choosedCompany(event) {
     xhr.open('GET', url);
     xhr.responseType = 'json';
     xhr.onload = function () {
-        createMenu(this.response);
+        MenuRestoran(this.response);
         GiveInfoToModal(this.response);
     }
     xhr.send();
@@ -82,18 +82,10 @@ function onGorBtn(target) {
 
 function onX2Btn(target) {
     let cont = document.querySelector('.modal-menu-info');
-    if (target.checked) {
-        document.querySelector('.modal-option-2').innerHTML = '';
-        let num = 0;
-        let i = 0;
-        let  = elem.cloneNode(true);
-                v2bols.classList.remove('d-none');
-                elem.querySelector('.modal-menu-count').innerHTML = Number(elem.querySelector('.modal-menu-count').innerHTML) + 1;
-                elem.classList.remove('d-none');
-                v2bols.querySelector('.modal-menu-count').innerHTML = 1;
-                v2bols.querySelector('.modal-menu-sum').innerHTML = 0;
-                document.querySelector('.modal-option-2').append(v2bols);
-    }
+    let total = document.querySelector('.totalPrice').innerHTML;
+    document.querySelector('.totalPrice').innerHTML = total * 1,6 ;
+    document.querySelector('.modal-total-price').innerHTML = total * 1,6 ;
+    document.querySelector('.modal-option-2').innerHTML = 'Позиций становится в 2 раза больше';
 }
 
 function filtertake(page = 1) {
@@ -367,7 +359,7 @@ function ModMenElem(price, elem) {
     return item;
 }
 
-function createMenu(element) {
+function MenuRestoran(element) {
     let menuContainer = document.querySelector('.menu-container');
     if (menuContainer.innerHTML) {
         console.log(true);
@@ -427,7 +419,7 @@ function createMenu(element) {
                 if (document.querySelector('#option-2').checked) {
                     let X2n = document.querySelector('.modal-option-2').querySelector('.modal-menu-name').innerHTML;
                     if (menuItem.querySelector('.modal-menu-name').innerHTML == X2n) {
-                        menuItem.querySelector('.modal-menu-count').innerHTML = count + 1;
+                        menuItem.querySelector('.modal-menu-count').innerHTML = count;
                     } else {
                         menuItem.querySelector('.modal-menu-count').innerHTML = count;
                     }
